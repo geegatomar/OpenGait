@@ -149,8 +149,14 @@ class BigGait__Dinov2_Gaitbase(BaseModel):
         self.backbone.eval()
         self.backbone.requires_grad_(False)
         
-        self.Mask_Branch.train()
-        self.Mask_Branch.requires_grad_(True)
+        # self.Mask_Branch.train()
+        # self.Mask_Branch.requires_grad_(True)
+        
+        # --- ADD MASK BRANCH INIT AND FREEZING HERE ---
+        self.init_Mask_Branch() # Call the loading function
+        self.Mask_Branch.eval() # Set to eval mode
+        self.Mask_Branch.requires_grad_(False) # Freeze it for inference
+        # --- END ADDED MASK BRANCH ---
         
         n_parameters = sum(p.numel() for p in self.parameters())
         self.msg_mgr.log_info('All Backbone Count: {:.5f}M'.format(n_parameters / 1e6))
