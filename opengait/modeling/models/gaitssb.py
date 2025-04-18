@@ -143,7 +143,7 @@ class GaitSSB_Pretrain(BaseModel):
 
 import torch.optim as optim
 import numpy as np
-from utils import get_valid_args, list2var
+from opengait.utils import get_valid_args, list2var
 
 class no_grad(torch.no_grad):
     def __init__(self, enable=True):
